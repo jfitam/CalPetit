@@ -9,6 +9,8 @@ const { openingHours, business, ui } = SITE;
 const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
   `${SITE.name} ${business.address.street} ${business.address.city}`
 )}`;
+const closingDaysLabels = openingHours.filter((h) => h.closed).map((h) => h.label).join(", ");
+const openingDays = openingHours.filter((h) => !h.closed);
 ---
 
 <section id="info" class="section section-alt">
@@ -17,19 +19,12 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${enco
     <h2>{ui.infoTitle}</h2>
     <div class="grid-2">
       <div class="card">
-        <h3>{ui.hoursTitle}</h3>
-        <table class="hours-table">
-          <tbody>
-            {
-              openingHours.map((h) => (
-                <tr>
-                  <th scope="row">{h.label}</th>
-                  <td>{h.closed ? ui.closedLabel : `${h.opens} – ${h.closes}`}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+        <h3>{ui.openingHoursLabel}</h3>
+        <p>De Dimecres a Diumenge de 11:00 a 17:00 i de 19:00 a 00:00</p>
+        <h3>{ui.kitchenOpeningHoursLabel}</h3>
+        <p>De 12:30 a 15:00 i de 19:30 a 22:30</p>
+        <h3>{ui.closingDaysLabel}</h3>
+        <p>{closingDaysLabels}</p>
       </div>
 
       <div class="card">

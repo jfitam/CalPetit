@@ -25,8 +25,8 @@ const averageRounded = Math.round(average);
         {reviews.eyebrow && <p class="section-eyebrow">{reviews.eyebrow}</p>}
         <h2 class="reviews-title">{reviews.title}</h2>
       </div>
-      <p class="reviews-score" aria-label={`${ui.ratingLabel} ${averageLabel} ${ui.ratingOutOf}`}>
-        <span class="reviews-score-number" aria-hidden="true">{averageLabel}</span>
+      <p class="reviews-score" aria-label={`${ui.ratingLabel} ${reviews.googleRating} ${ui.ratingOutOf}`}>
+        <span class="reviews-score-number" aria-hidden="true">{reviews.googleRating}</span>
         <span class="reviews-score-stars" aria-hidden="true">
           {[1, 2, 3, 4, 5].map((n) => (
             <svg

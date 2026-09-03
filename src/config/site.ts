@@ -16,60 +16,59 @@
 export const SITE = {
   // --- Identity & URLs -------------------------------------------------------
   url: "https://astro-chalet.vercel.app", // NO trailing slash
-  lang: "en",
+  lang: "ca",
   // BCP 47 locale used for Open Graph (e.g. "en_US", "fr_FR", "de_DE")
-  ogLocale: "en_US",
-  name: "The Alpine Loaf",
-  tagline: "Artisan bakery at the foot of Mont Blanc",
+  ogLocale: "ca_ES",
+  name: "Cal Petit",
+  tagline: "El teu racó Gatrobar a Peralada",
   description:
-    "Artisan bakery in Chamonix: naturally leavened sourdough, all-butter pastries and homemade cakes, fresh from the oven every day from 6:30am.",
+    "Un raconet acollidor amb les millors viandes de la comarca. Visita'ns i gaudeix d'una experiència gastronòmica única.",
 
   // --- Business (powers the JSON-LD LocalBusiness markup) --------------------
   business: {
     // The most specific schema.org type you can find. Useful examples:
     // "Bakery", "Restaurant", "LodgingBusiness", "HairSalon", "Plumber",
     // "SportingGoodsStore", "TouristInformationCenter"... (see schema.org)
-    schemaType: "Bakery",
-    phone: "+33450000000",
+    schemaType: "Restaurant",
+    phone: "+34972290691",
     email: "hello@alpineloaf.example.com",
     address: {
-      street: "12 rue du Docteur Paccard",
-      postalCode: "74400",
-      city: "Chamonix-Mont-Blanc",
-      country: "FR",
+      street: "Carrer Requesens, 7",
+      postalCode: "17491",
+      city: "Peralada",
+      country: "ES",
     },
     // GPS coordinates (Google Maps → right-click the location → copy)
-    geo: { latitude: 45.9219, longitude: 6.8696 },
+    geo: { latitude: 42.3082307, longitude: 3.007987 },
     // Price range shown by Google: "€", "€€", "€€€" (or "$", "$$"...)
     priceRange: "€",
     // Link to the business's Google Business Profile
-    googleBusinessUrl: "https://maps.google.com/?cid=EXAMPLE",
+    googleBusinessUrl: "https://maps.app.goo.gl/CUdXZztYFVLsJ7Fo8",
     socialProfiles: [
       "https://www.instagram.com/example",
-      "https://www.facebook.com/example",
     ],
   },
 
   // --- Opening hours (shown on the site AND injected into the JSON-LD) -------
   // days: 0 = Monday ... 6 = Sunday. closed: true = closing day.
   openingHours: [
-    { label: "Monday", days: [0], opens: "06:30", closes: "19:00" },
-    { label: "Tuesday", days: [1], opens: "06:30", closes: "19:00" },
-    { label: "Wednesday", days: [2], closed: true },
-    { label: "Thursday", days: [3], opens: "06:30", closes: "19:00" },
-    { label: "Friday", days: [4], opens: "06:30", closes: "19:00" },
-    { label: "Saturday", days: [5], opens: "06:30", closes: "19:30" },
-    { label: "Sunday", days: [6], opens: "07:00", closes: "13:00" },
+    { label: "Dilluns", days: [0], closed: true },
+    { label: "Dimarts", days: [1], closed: true },
+    { label: "Dimecres", days: [2], opens: "19:00", closes: "24:00"},
+    { label: "Dijous", days: [3], opens: "19:00", closes: "24:00" },
+    { label: "Divendres", days: [4], opens: "19:00", closes: "24:00" },
+    { label: "Dissabte", days: [5], opens: "19:00", closes: "24:00" },
+    { label: "Diumenge", days: [6], opens: "19:00", closes: "24:00" },
   ] as OpeningHours[],
 
   // --- Navigation (home page anchors + pages) --------------------------------
   navigation: [
-    { label: "Our products", href: "/#services" },
-    { label: "Our story", href: "/#about" },
-    { label: "Gallery", href: "/#gallery" },
-    { label: "Reviews", href: "/#reviews" },
-    { label: "Visit us", href: "/#info" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Valors", href: "/#services" },
+    { label: "Nosaltres", href: "/#about" },
+    { label: "Imatges", href: "/#gallery" },
+    { label: "Opinions", href: "/#reviews" },
+    { label: "Visita'ns", href: "/#info" },
+    { label: "Contacte", href: "/#contact" },
   ],
 
   // --- Hero section -----------------------------------------------------------
@@ -79,49 +78,49 @@ export const SITE = {
     // "split"     = text left, framed photo right, on the dark background
     //               (best with a product close-up).
     layout: "immersive" as "immersive" | "split",
-    title: "Real bread, baked in Chamonix",
+    title: "El sabor de l'Empordà a cada mossegada",
     // Optional: a substring of the title rendered in italic accent color.
     // Leave "" to disable.
-    titleHighlight: "Chamonix",
+    titleHighlight: "sabor",
     subtitle:
-      "Natural sourdough, stone-milled flour and homemade pastries, prepared every night in our town-centre bakehouse.",
-    image: "/images/hero.webp",
-    imageAlt: "Freshly baked sourdough loaf held on a linen cloth",
-    primaryCta: { label: "See our products", href: "/#services" },
-    secondaryCta: { label: "Find us", href: "/#info" },
+      "Gastrobar del primer nivell, acollidor, a prop teu.",
+    image: "/images/hero.jpeg",
+    imageAlt: "Entrada a Cal Petit Gastrobar",
+    primaryCta: { label: "Els nostres valors", href: "/#services" },
+    secondaryCta: { label: "On som", href: "/#info" },
     // Trust badges shown under the buttons (2 to 4 short items).
     // Great spots for the Google rating, founding year, a signature promise.
-    highlights: ["★ 4.7 on Google", "Family-run since 1987", "Fresh from 6:30am"],
+    highlights: ["★ 4.9 a Google", "De la terra", "Menjar cassolà"],
   },
 
   // --- Services / products (3 to 6 cards) -------------------------------------
   services: {
-    eyebrow: "What we bake", // small uppercase label above the title ("" hides it)
-    title: "Our products",
-    intro: "Everything is kneaded, shaped and baked on site, every single day.",
+    eyebrow: "Valors", // small uppercase label above the title ("" hides it)
+    title: "Així entenem la cuina",
+    intro: "Perquè cuinar va més enllà dels fogons.",
     items: [
       {
-        title: "Sourdough breads",
+        title: "Ingredients de proximitat",
         description:
-          "Stone-milled boules, country loaves, seeded or plain: a slow 24-hour fermentation for bread that keeps all week.",
+          "Treballem amb productes frescos i de temporada, prioritzant sempre que podem els proveïdors de la zona.",
         icon: "bread",
       },
       {
-        title: "All-butter pastries",
+        title: "Cuina cassolana",
         description:
-          "Croissants, pains au chocolat and flaky brioches made with AOP Charentes-Poitou butter, baked in batches until noon.",
+          "Plats fets a casa, amb receptes senzilles, sabors reconeixibles i molta cura en cada elaboració.",
         icon: "croissant",
       },
       {
-        title: "Homemade cakes",
+        title: "Receptes de temporada",
         description:
-          "Seasonal fruit tarts, éclairs and our famous mont-blanc with Ardèche chestnut cream.",
+          "Adaptem la nostra cuina al producte de cada època de l’any per oferir plats variats i amb més sabor.",
         icon: "cake",
       },
       {
-        title: "Lunch on the go",
+        title: "Ambient acollidor",
         description:
-          "Baguette sandwiches, fougasses and quiches — perfect to slip into your pack before riding the cable car.",
+          "Volem que et sentis a gust des que entres: un espai proper, tranquil i pensat per gaudir sense presses.",
         icon: "sandwich",
       },
     ],
@@ -129,97 +128,131 @@ export const SITE = {
 
   // --- About -------------------------------------------------------------------
   about: {
-    eyebrow: "Since 1987",
-    title: "Our story",
-    paragraphs: [
-      "Settled on rue du Docteur Paccard since 1987, The Alpine Loaf has been run by the Ravanel family for three generations. We work exclusively with stone-milled Alpine flours and a sourdough starter we have kept alive for over thirty years.",
-      "Summer and winter alike, the ovens are lit at 3am so that mountain guides, seasonal workers and families find warm bread the minute we open.",
-    ],
-    image: "/images/about.webp",
-    imageAlt: "Baker's hands kneading floured dough on a dark workbench",
+    eyebrow: "Nosaltres",
+    title: "La nostra història",
+  paragraphs: [
+    "Cal Petit és un projecte jove, nascut de l’experiència acumulada durant anys en altres restaurants i de les ganes de crear un espai propi.",
+    "Darrere de la cuina hi ha dues persones amb ofici, entusiasme i una manera molt clara d’entendre l’hostaleria: bon producte, plats fets amb cura i un tracte proper."
+  ],
+    image: "/images/about.jpeg",
+    imageAlt: "Interior del local",
   },
 
   // --- Gallery (4 to 8 images) ---------------------------------------------------
   gallery: {
-    eyebrow: "Behind the counter",
-    title: "In pictures",
+    eyebrow: "Imatges",
+    title: "Un cop d'ull als nostres plats",
     // The first image is featured (2×2 in the grid): 5 or 7 images fill the
     // grid perfectly on desktop.
     images: [
-      { src: "/images/gallery-1.webp", alt: "Wooden shelves stacked with rustic sourdough loaves" },
-      { src: "/images/gallery-2.webp", alt: "Golden croissants in the bakery display case" },
-      { src: "/images/gallery-3.webp", alt: "Éclairs and cream puffs lined up on the pastry counter" },
-      { src: "/images/gallery-4.webp", alt: "The bakery storefront and its green woodwork" },
-      { src: "/images/gallery-5.webp", alt: "Baker presenting a crusty boule over the wooden counter" },
+      { src: "/images/galeria-1.jpeg", alt: "Escalivada" },
+      { src: "/images/galeria-2.jpeg", alt: "Plat1" },
+      { src: "/images/galeria-3.jpeg", alt: "Plat2" },
+      { src: "/images/galeria-4.jpeg", alt: "Plat3" },
+      { src: "/images/galeria-5.jpeg", alt: "Plat4" },
     ],
   },
 
   // --- Customer reviews (copied from the business's Google profile) --------------
   reviews: {
-    eyebrow: "Reviews",
-    title: "In their words",
+    eyebrow: "Opinions",
+    title: "El que diuen els nostres clients",
+    googleRating: 4.9,
     // Link to the "reviews" tab of the Google profile, to read or leave more
-    allReviewsUrl: "https://maps.google.com/?cid=EXAMPLE",
+    allReviewsUrl: "https://maps.app.goo.gl/Myp1z3rP8Lf9ZnEN7",
     items: [
       {
-        author: "Marie L.",
+        author: "laia ros",
         rating: 5,
-        text: "The best bread in the valley, hands down. The stone-milled boule keeps for a week and the mont-blanc is to die for.",
+        text: "Muy buen descubrimiento!!! La atención es de 10. Los platos están deliciosos, recomiendo el Magrec d’anec, de lo mejor que hemos probado en mucho tiempo. El bacalla estaba muy rico! Los postres están muy elaborados y caseros. Tienen cosas sin gluten, para los celíacos. A destacar, que es petfriendly y pudimos estar con nuestro perro! Muchas gracias 🙏🏼.",
       },
       {
-        author: "Thomas B.",
+        author: "Yelyzaveta Latysheva",
         rating: 5,
-        text: "Open early — perfect before heading out on a route. The baguette sandwiches are generous and the coffee is good.",
+        text: "Very good local restaurant! The food was delicious and the people are super nice! Recommend eating here, if you are in the area.",
       },
       {
-        author: "Elena K.",
-        rating: 4,
-        text: "Wonderful bakery, authentic sourdough bread. A bit of a queue on Saturday mornings but absolutely worth it.",
+        author: "Anna Orta",
+        rating: 5,
+        text: "Sitio recientemente inaugurado, nos han tratado de manera inmejorable y el lugar es muy acogedor. La comida buenísima y de mucha calidad. El tataki de atún un espectáculo, el magret muy jugoso y los boquerones muy sabrosos. Hasta el pan con tomate estaba buenísimo. Volveremos pronto seguro.",
       },
     ],
   },
 
   // --- FAQ (SEO bonus: questions people actually type into Google) ---------------
   faq: {
-    eyebrow: "Good to know",
-    title: "Frequently asked questions",
+    eyebrow: "Consultes",
+    title: "Preguntes freqüents",
     items: [
       {
-        question: "Do you bake special breads to order?",
+        question: "Teniu opcions per a persones celíaques?",
         answer:
-          "Yes: rye loaves, gluten-free (dedicated oven on Tuesdays) and large pieces for restaurants and mountain huts, ordered 48 hours ahead by phone.",
+          "Disposem d’algunes opcions sense gluten. Si tens celiaquia o alguna intolerància, avisa’ns abans de demanar per poder informar-te correctament.",
       },
       {
-        question: "Can I order a birthday or wedding cake?",
+        question: "Puc consultar els al·lèrgens dels plats?",
         answer:
-          "Of course. Allow one week's notice for tiered and custom cakes. Drop by the shop and we'll design it together.",
+          "Sí. Pregunta’ns i t’informarem dels al·lèrgens presents en cada plat.",
       },
       {
-        question: "Are you open between seasons?",
+        question: "Teniu opcions vegetarianes?",
         answer:
-          "Yes, all year round except Wednesdays and three weeks in November. Holiday dates are posted in the shop and on our Google profile.",
+          "Sí, disposem d’opcions vegetarianes. Consulta’ns per saber quines tenim disponibles aquell dia.",
       },
       {
-        question: "Where can I park near the bakery?",
+        question: "Teniu menú infantil?",
         answer:
-          "The Mont-Blanc car park is a 3-minute walk away, and there is a drop-off zone right outside the shop on rue du Docteur Paccard.",
+          "Disposem d’opcions pensades per als més petits. Pregunta’ns i t’ajudarem a trobar la millor opció.",
+      },
+      {
+        question: "Feu menjar per emportar?",
+        answer:
+          "Sí, alguns dels nostres plats es poden preparar per emportar. Consulta’ns disponibilitat.",
+      },
+      {
+        question: "Admeteu animals?",
+        answer:
+          "Sí, som pet friendly. Et recomanem avisar-nos si vens amb un animal, especialment si voleu seure a l’interior.",
+      },
+      {
+        question: "Cal reservar taula?",
+        answer:
+          "No sempre és necessari, però recomanem reservar especialment els caps de setmana i en hores punta.",
+      },
+      {
+        question: "Accepteu grups?",
+        answer:
+          "Sí, podem acollir grups. Per a grups nombrosos, et recomanem contactar amb nosaltres amb antelació.",
+      },
+      {
+        question: "Teniu terrassa?",
+        answer:
+          "Sí, disposem de terrassa subjecta a disponibilitat i a les condicions meteorològiques.",
+      },
+      {
+        question: "On es pot aparcar?",
+        answer:
+          "Hi ha opcions d’aparcament a prop del restaurant. Consulta’ns si necessites indicacions.",
       },
     ],
   },
 
   // --- Call-to-action banner ------------------------------------------------------
   ctaBanner: {
-    title: "Planning an event?",
-    text: "Buffets, weddings, seminars or mountain-hut resupply: write to us and we'll send a quote within 24 hours.",
-    button: { label: "Request a quote", href: "/#contact" },
+    title: "Vols reservar taula?",
+    text: "Reserva amb antelació i assegura’t lloc, especialment els caps de setmana.",
+    button: {
+      label: "Reservar taula",
+      href: "/#contact",
+    },
   },
 
   // --- Contact form ------------------------------------------------------------------
   contact: {
-    eyebrow: "Get in touch",
-    title: "Write to us",
+    eyebrow: "Contacte",
+    title: "Vine'ns a conèixer",
     intro:
-      "A question, a special order? Leave us a message — we reply within one business day.",
+      "Posa't en contacte amb nosaltres, per qualsevol dubte o per reservar taula.",
     // Form endpoint. Options:
     //  1. Formspree/Basin: paste the URL the service gives you.
     //  2. Your own backend (any endpoint accepting a classic form POST).
@@ -249,30 +282,33 @@ export const SITE = {
   // Every fixed label used by the components. Translate this section (plus the
   // content above) to ship the site in another language — no component edits.
   ui: {
-    skipToContent: "Skip to content",
-    menuOpenLabel: "Open menu",
-    closedLabel: "Closed",
-    hoursTitle: "Opening hours",
-    findUsTitle: "Find us",
-    infoEyebrow: "Practical",
-    infoTitle: "Visit us",
-    directionsLabel: "Directions on Google Maps",
-    googleProfileLabel: "Our Google profile",
-    readAllReviews: "Read all reviews on Google →",
-    ratingLabel: "Rating:", // followed by "4 out of 5"
-    ratingOutOf: "out of 5",
-    reviewsScoreLabel: "from Google reviews", // under the big average score
-    formNameLabel: "Your name",
-    formEmailLabel: "Your email",
-    formMessageLabel: "Your message",
-    formSubmitLabel: "Send message",
-    formHoneypotLabel: "Leave this field empty",
-    legalNoticeLabel: "Legal notice",
-    privacyPolicyLabel: "Privacy policy",
-    allRightsReserved: "All rights reserved",
-    notFoundTitle: "Page not found",
-    notFoundText: "The page you are looking for does not exist or has moved.",
-    notFoundCta: "Back to the home page",
+    skipToContent: "Saltar al contingut",
+    menuOpenLabel: "Obrir menu",
+    closedLabel: "Tancat",
+    hoursTitle: "Horari d'obertura",
+    findUsTitle: "Troba'ns",
+    infoEyebrow: "Informació",
+    infoTitle: "Visita'ns",
+    directionsLabel: "Direccions a Google Maps",
+    googleProfileLabel: "El nostre perfil de Google",
+    readAllReviews: "Llegeix més opinions →",
+    ratingLabel: "Valoració:", // followed by "4 out of 5"
+    ratingOutOf: "de 5",
+    reviewsScoreLabel: "desde Google Reviews", // under the big average score
+    formNameLabel: "Nom",
+    formEmailLabel: "Email",
+    formMessageLabel: "Missatge",
+    formSubmitLabel: "Enviar",
+    formHoneypotLabel: "Deixa aquest camp buit (anti-spam)",
+    legalNoticeLabel: "Informació legal",
+    privacyPolicyLabel: "Política de privacitat",
+    allRightsReserved: "Tots els drets reservats",
+    notFoundTitle: "No s'ha trobat la pàgina",
+    notFoundText: "La pàgina que estàs buscant no existeix o ha estat eliminada",
+    notFoundCta: "Tornar a la pàgina principal",
+    closingDaysLabel: "Dies de tancament",
+    openingHoursLabel: "Horari d'obertura",
+    kitchenOpeningHoursLabel: "Horari de cuina",
   },
 } as const;
 
