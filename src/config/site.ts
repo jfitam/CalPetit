@@ -54,12 +54,25 @@ export const SITE = {
   openingHours: [
     { label: "Dilluns", days: [0], closed: true },
     { label: "Dimarts", days: [1], closed: true },
+    { label: "Dimecres", days: [2], opens: "11:00", closes: "17:00"},
     { label: "Dimecres", days: [2], opens: "19:00", closes: "24:00"},
+    { label: "Dijous", days: [3], opens: "11:00", closes: "17:00" },
     { label: "Dijous", days: [3], opens: "19:00", closes: "24:00" },
+    { label: "Divendres", days: [4], opens: "11:00", closes: "17:00" },
     { label: "Divendres", days: [4], opens: "19:00", closes: "24:00" },
+    { label: "Dissabte", days: [5], opens: "11:00", closes: "17:00" },
     { label: "Dissabte", days: [5], opens: "19:00", closes: "24:00" },
+    { label: "Diumenge", days: [6], opens: "11:00", closes: "17:00" },
     { label: "Diumenge", days: [6], opens: "19:00", closes: "24:00" },
   ] as OpeningHours[],
+
+  // --- opening hours in a human readable way ---
+  openingHoursReadable: [
+    { days: "De Dimecres a Diumenge", openingPeriods: ["11:00-17:00", "19:00-24:00"], kitchenPeriods:["12:30-15:00", "19:30-22:00"] },
+  ],
+
+  closedDaysReadable: "Dilluns i Dimarts",
+
 
   // --- Navigation (home page anchors + pages) --------------------------------
   navigation: [
@@ -103,25 +116,25 @@ export const SITE = {
         title: "Ingredients de proximitat",
         description:
           "Treballem amb productes frescos i de temporada, prioritzant sempre que podem els proveïdors de la zona.",
-        icon: "bread",
+        icon: "mappin",
       },
       {
         title: "Cuina cassolana",
         description:
           "Plats fets a casa, amb receptes senzilles, sabors reconeixibles i molta cura en cada elaboració.",
-        icon: "croissant",
+        icon: "house",
       },
       {
         title: "Receptes de temporada",
         description:
           "Adaptem la nostra cuina al producte de cada època de l’any per oferir plats variats i amb més sabor.",
-        icon: "cake",
+        icon: "chefhat",
       },
       {
         title: "Ambient acollidor",
         description:
           "Volem que et sentis a gust des que entres: un espai proper, tranquil i pensat per gaudir sense presses.",
-        icon: "sandwich",
+        icon: "heart",
       },
     ],
   },
@@ -268,13 +281,19 @@ export const SITE = {
   // Shown on /legal-notice/ — mandatory for professional sites in many
   // EU countries (e.g. France's LCEN, Germany's Impressumspflicht).
   legal: {
-    companyType: "SARL with a capital of €10,000",
+    companyName: "Cal Petit Gastrobar",
+    address: "Carrer Requesens, 7, 17491 Peralada, Girona, Espanya",
+    companyType: "Societat Limitada",
     registrationNumber: "000 000 000 00000",
-    publisher: "Jeanne Ravanel",
+    province: "Girona",
+    book: "",
+    sheet: "",
+    file: "",
+    inscriptionNumber: "",
     host: {
-      name: "Vercel Inc.",
-      address: "440 N Barranca Ave #4133, Covina, CA 91723, USA",
-      url: "https://vercel.com",
+      name: "XXX",
+      address: "ADDRESS",
+      url: "url",
     },
   },
 
@@ -309,6 +328,7 @@ export const SITE = {
     closingDaysLabel: "Dies de tancament",
     openingHoursLabel: "Horari d'obertura",
     kitchenOpeningHoursLabel: "Horari de cuina",
+    conjuction: "i"
   },
 } as const;
 

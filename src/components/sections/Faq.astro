@@ -40,10 +40,16 @@ const jsonLdFaq = {
 
 <style>
   .faq-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-1);
-    max-width: var(--prose-width);
+    max-width: none;
+  }
+
+  @media (max-width: 700px) {
+    .faq-list {
+      grid-template-columns: 1fr;
+    }
   }
 
   .faq-item {
