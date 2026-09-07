@@ -57,8 +57,8 @@ const [beforeHl, afterHl] = hasHighlight
       </h1>
       <p class="hero-subtitle">{hero.subtitle}</p>
       <p class="hero-actions">
-        <a class="button" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
-        <a class="button button-secondary" href={hero.secondaryCta.href}>
+        <a class="button" href=`/${SITE.lang}/${hero.primaryCta.href}`>{hero.primaryCta.label}</a>
+        <a class="button button-secondary" href=`/${SITE.lang}/${hero.secondaryCta.href}`>  
           {hero.secondaryCta.label}
         </a>
       </p>
