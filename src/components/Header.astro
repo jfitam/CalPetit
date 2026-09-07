@@ -46,7 +46,7 @@ const languageModules = import.meta.glob("../i18n/*.ts", {
         <ul id="language-list">
           {Object.values(languageModules).map((module) => (
             <li>
-              <a href={`/${module.lang}${pathWithoutLang}`} data-lang={module.lang}>
+              <a href={`/${module.lang}/${pathWithoutLang}`} data-lang={module.lang}>
                 {module.languageDescriptor}
               </a>
             </li>
