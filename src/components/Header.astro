@@ -2,12 +2,25 @@
 // Sticky dark header with a subtle blur: business name + navigation.
 // On mobile the menu opens via a burger button (the tiny script at the
 // bottom is the ONLY JavaScript on the whole site — maximum performance).
-import { SITE } from "../config/site";
+import getContent from "../utils/getcontent.ts"
+const SITE = getContent(Astro.currentLocale);
+const currentPath = Astro.url.pathname;
+const pathWithoutLang = currentPath.split("/").slice(2).join("/");
+const languageModules = import.meta.glob("../i18n/*.ts", {
+  eager: true,
+  import: "default",
+}) as Record<
+  string,
+  {
+    lang: string,
+    languageDescriptor: string;
+  }
+>;
 ---
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="/" class="brand">{SITE.name}</a>
+    <a href={`/${SITE.lang}/`} class="brand">{SITE.name}</a>
 
     <button
       id="menu-burger"
@@ -21,7 +34,25 @@ import { SITE } from "../config/site";
     </button>
 
     <nav id="main-menu" class="nav">
-      {SITE.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      {SITE.navigationBase.map((item) => (
+        <a href={`/${SITE.lang}${item.href}`}>
+          {SITE.navigationLabels[item.key]}
+        </a>
+      ))}
+
+      <div id="language-selector" class="nav-item">
+        <span id="language-button">🌐 {SITE.lang.toUpperCase()}</span>
+
+        <ul id="language-list">
+          {Object.values(languageModules).map((module) => (
+            <li>
+              <a href={`/${module.lang}/${pathWithoutLang}`} data-lang={module.lang}>
+                {module.languageDescriptor}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   </div>
 </header>
@@ -60,20 +91,62 @@ import { SITE } from "../config/site";
 
   .nav {
     display: flex;
+    align-items: center;
     gap: var(--space-3);
     flex-wrap: wrap;
   }
 
-  .nav a {
+  .nav a, .nav #language-button {
     color: var(--color-dark-text-muted);
     text-decoration: none;
     font-size: var(--text-sm);
     font-weight: 600;
     transition: color var(--transition);
+    cursor:pointer;
   }
 
-  .nav a:hover {
+  .nav a:hover, .nav #language-button:hover {
     color: var(--color-accent-bright);
+  }
+
+  #language-selector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    
+  }
+
+  #language-list {
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    right: -1rem;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  #language-list li {
+    cursor: pointer;
+    color: var(--color-accent);
+  } 
+
+  #language-list li:hover {
+    color: var(--color-on-accent);
+    background: var(--color-accent);
+  }
+
+  #language-list a {
+    display:block;
+    padding: var(--space-2) var(--space-3);
+    text-decoration: none;
+    color: inherit;
   }
 
   .burger {
@@ -105,6 +178,7 @@ import { SITE } from "../config/site";
       left: 0;
       right: 0;
       flex-direction: column;
+      align-items: stretch;
       gap: 0;
       background: var(--color-dark-bg);
       border-bottom: 1px solid rgba(247, 240, 228, 0.12);
@@ -114,9 +188,19 @@ import { SITE } from "../config/site";
       display: flex;
     }
 
-    .nav a {
+    .nav a, #language-selector {
       padding: var(--space-2) var(--space-3);
       border-top: 1px solid rgba(247, 240, 228, 0.12);
+    }
+
+    .nav #language-selector a {
+      border: none;
+    }
+
+    #language-list {
+      width:100%;
+      top: 100%;
+      left: 0;
     }
   }
 </style>
@@ -125,6 +209,7 @@ import { SITE } from "../config/site";
   // Mobile menu: ~10 lines of JS — the entire JavaScript budget of the site.
   const burger = document.getElementById("menu-burger");
   const menu = document.getElementById("main-menu");
+  const languageSelector = document.getElementById("language-selector");
 
   burger?.addEventListener("click", () => {
     const open = menu?.classList.toggle("open");
@@ -138,4 +223,24 @@ import { SITE } from "../config/site";
       burger?.setAttribute("aria-expanded", "false");
     }
   });
+
+  languageSelector?.addEventListener("click", () => {
+    const languageList = document.getElementById("language-list");
+    if (languageList) {
+      const isVisible = languageList.style.visibility === "visible";
+      languageList.style.visibility = isVisible ? "hidden" : "visible";
+      languageList.style.opacity = isVisible ? "0" : "1";
+    }
+  });
+
+  document.querySelectorAll<HTMLAnchorElement>("#language-list a").forEach((link) => {
+    link.addEventListener("click", () => {
+      const lang = link.dataset.lang;
+
+      if (lang) {
+        localStorage.setItem("language", lang);
+      }
+    });
+  });
+
 </script>

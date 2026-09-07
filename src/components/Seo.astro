@@ -3,7 +3,8 @@
 // Used by the Base layout — each page passes its own title/description.
 // This is the theme's "technical SEO" module: canonical URL, Open Graph,
 // Twitter cards. The JSON-LD LocalBusiness markup is a separate component.
-import { SITE } from "../config/site";
+import getContent from "../utils/getcontent.ts"
+const SITE = getContent(Astro.currentLocale);
 
 interface Props {
   title: string;
@@ -14,7 +15,7 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description, image = SITE.hero.image, noindex = false } = Astro.props;
+const { title, description, image = SITE.heroLabels.image, noindex = false } = Astro.props;
 
 // Absolute canonical URL of the current page — essential to avoid duplicate
 // content issues (www/non-www, with/without trailing slash...)

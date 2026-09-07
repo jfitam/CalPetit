@@ -1,8 +1,7 @@
 ---
 // About section: the business's story — framed image + text with a drop cap.
-import { SITE } from "../../config/site";
-
-const { about } = SITE;
+import getContent from "../../utils/getcontent.ts"
+const { about } = getContent(Astro.currentLocale);
 ---
 
 <section id="about" class="section section-alt">

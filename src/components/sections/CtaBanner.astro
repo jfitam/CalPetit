@@ -1,9 +1,8 @@
 ---
 // Call-to-action banner: a dark break in the page with one clear proposition
 // (quote, booking, order...) and a warm glow rising from the bottom.
-import { SITE } from "../../config/site";
-
-const { ctaBanner } = SITE;
+import getContent from "../../utils/getcontent.ts"
+const { ctaBanner } = getContent(Astro.currentLocale);
 ---
 
 <section class="banner">

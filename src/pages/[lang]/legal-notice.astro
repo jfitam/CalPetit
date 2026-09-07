@@ -1,0 +1,49 @@
+---
+// Legal notice ("mentions légales" / "Impressum") — mandatory for
+// professional sites in many EU countries.
+// The identity block is generated from SITE.legal; the prose below is a
+// generic English template: ADAPT IT to your jurisdiction and language.
+// (A French version is provided in examples/french-bakery/.)
+import Base from "../../layouts/Base.astro";
+import getContent from "../../utils/getcontent.ts"
+
+const SITE = getContent(Astro.currentLocale);
+const { legal, business, ui } = SITE
+
+export function getStaticPaths() {
+  const langModules = import.meta.glob("../../i18n/*.ts", {
+    eager: true,
+    import: "default",
+  }) as Record<string, { lang: string }>;
+
+  return Object.values(langModules).map((module) => ({
+    params: { lang: module.lang },
+  }));
+}
+
+const { lang } = Astro.params;
+
+const modules = import.meta.glob("../../i18n/legal/*.mdx", {
+  eager: true,
+}) as Record<string, { Content: any }>;
+
+const match = Object.entries(modules).find(([path]) =>
+  path.includes(`/legal/${lang}.mdx`)
+);
+
+if (!match) {
+  throw new Error(`Legal page not found for language: ${lang}`);
+}
+
+const LegalPage = match[1].Content;
+---
+
+<Base
+  title={`${ui.legalNoticeLabel} — ${SITE.name}`}
+  description={`Legal notice for ${SITE.name}.`}
+  noindex
+>
+  <div class="container page-content">
+    <LegalPage ui={ui} legal={legal} business={business} />
+  </div>
+</Base>

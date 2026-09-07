@@ -4,9 +4,9 @@
 // item's border lights up in the accent color.
 // SEO bonus: the FAQPage JSON-LD lets Google show the questions directly in
 // search results.
-import { SITE } from "../../config/site";
+import getContent from "../../utils/getcontent.ts"
+const { faq } = getContent(Astro.currentLocale);
 
-const { faq } = SITE;
 
 const jsonLdFaq = {
   "@context": "https://schema.org",

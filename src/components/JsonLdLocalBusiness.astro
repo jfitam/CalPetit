@@ -4,7 +4,8 @@
 // results (hours, phone, reviews...). Everything is generated from
 // SITE.business and SITE.openingHours: no data to maintain twice.
 // Validate with: https://search.google.com/test/rich-results
-import { SITE } from "../config/site";
+import getContent from "../utils/getcontent.ts"
+const SITE = getContent(Astro.currentLocale);
 
 // schema.org names days in English
 const SCHEMA_DAYS = [

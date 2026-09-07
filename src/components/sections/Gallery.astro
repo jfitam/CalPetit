@@ -3,9 +3,9 @@
 // the rest tile around it. Lazy loading, gentle hover zoom with a warm
 // bottom gradient (both disabled under prefers-reduced-motion / touch).
 // Tip: 5 or 7 images fill the desktop grid perfectly.
-import { SITE } from "../../config/site";
+import getContent from "../../utils/getcontent.ts"
+const { gallery } = getContent(Astro.currentLocale);
 
-const { gallery } = SITE;
 ---
 
 <section id="gallery" class="section">
