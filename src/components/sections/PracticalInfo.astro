@@ -2,13 +2,22 @@
 // Practical info section: opening hours + address + map link.
 // The map is a link to Google Maps rather than an embedded iframe:
 // no third-party cookies on page load = simple GDPR story and a fast page.
-import { SITE } from "../../config/site";
+import getContent from "../../utils/getcontent.ts"
+import { groupPeriodsByDays } from "../../utils/openingHours.ts"
 
-const { openingHoursReadable, closedDaysReadable, business, ui } = SITE;
-
+const SITE = getContent(Astro.currentLocale)
+const { openingHours, kitchenOpeningHours, business, ui } = SITE;
 const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
   `${SITE.name} ${business.address.street} ${business.address.city}`
 )}`;
+const openingPeriods = openingHours.filter((h) => !h.closed)
+const kitchenOpeningPeriods = kitchenOpeningHours.filter((h) => !h.closed)
+const closedDays = new Set()
+openingHours.forEach((h) => {
+  if (h.closed) h.days.forEach((day) => closedDays.add(ui.days[day]))
+})
+const groupedOpeningPeriods = groupPeriodsByDays(openingPeriods)
+const groupedKitchenOpeningPeriods = groupPeriodsByDays(kitchenOpeningPeriods)
 
 ---
 
@@ -19,19 +28,28 @@ const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${enco
     <div class="grid-2">
       <div class="card">
         <h3>{ui.openingHoursLabel}</h3>
-        {openingHoursReadable.map((period) => (
-          <p>
-            {period.days} de {period.openingPeriods.join(` ${ui.conjuction} `)}<br />
-          </p>
+        {groupedOpeningPeriods.map((group) => (
+          <>
+            <p>{group.days.map((day) => ui.days[day]).join(", ")}</p>
+              <ul>
+              {group.periods.map((period) => (
+              <li>{period.opens} - {period.closes}</li>
+            ))}
+            </ul>
+          </>
         ))}
+        <p>{[...closedDays].join(", ")}: {ui.closed}</p>
         <h3>{ui.kitchenOpeningHoursLabel}</h3>
-        {openingHoursReadable.map((period) => (
-          <p>
-            {period.days} de {period.kitchenPeriods.join(` ${ui.conjuction} `)}<br />
-          </p>
+        {groupedKitchenOpeningPeriods.map((group) => (
+          <>
+            <p>{group.days.map((day) => ui.days[day]).join(", ")}</p>
+            <ul>
+            {group.periods.map((period) => (
+              <li>{period.opens} - {period.closes}</li>
+            ))}
+            </ul>
+          </>
         ))}
-        <h3>{ui.closingDaysLabel}</h3>
-        <p>{closedDaysReadable}</p>
       </div>
 
       <div class="card">

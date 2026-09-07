@@ -2,10 +2,10 @@
 // Services/products section: a card grid driven by SITE.services.
 // Icons are real inline SVGs in a gradient chip (see Icon.astro) — never
 // emoji. Each card carries a serif index number that lights up on hover.
-import { SITE } from "../../config/site";
+import getContent from "../../utils/getcontent.ts"
+const { services } = getContent(Astro.currentLocale);
 import Icon from "../Icon.astro";
 
-const { services } = SITE;
 ---
 
 <section id="services" class="section">

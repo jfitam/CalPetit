@@ -1,11 +1,12 @@
 ---
 // Base layout: the HTML skeleton shared by every page.
 import "../styles/global.css";
-import { SITE } from "../config/site";
+import getContent from "../utils/getcontent.ts"
 import Seo from "../components/Seo.astro";
 import JsonLdLocalBusiness from "../components/JsonLdLocalBusiness.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
 
 interface Props {
   title: string;
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const { title, description, noindex = false, withJsonLd = false } = Astro.props;
+const SITE = getContent(Astro.currentLocale)
 ---
 
 <!doctype html>

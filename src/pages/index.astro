@@ -1,27 +1,37 @@
 ---
-// Home page: the sections, assembled.
-// Adding/removing/reordering a section = moving one line here.
-import Base from "../layouts/Base.astro";
-import { SITE } from "../config/site";
-import Hero from "../components/sections/Hero.astro";
-import Services from "../components/sections/Services.astro";
-import About from "../components/sections/About.astro";
-import Gallery from "../components/sections/Gallery.astro";
-import Reviews from "../components/sections/Reviews.astro";
-import CtaBanner from "../components/sections/CtaBanner.astro";
-import Faq from "../components/sections/Faq.astro";
-import PracticalInfo from "../components/sections/PracticalInfo.astro";
-import Contact from "../components/sections/Contact.astro";
----
+const languageModules = import.meta.glob("../i18n/*.ts", {
+  eager: true,
+  import: "default",
+}) as Record<string, { lang: string }>;
 
-<Base title={`${SITE.name} — ${SITE.tagline}`} description={SITE.description} withJsonLd>
-  <Hero />
-  <Services />
-  <About />
-  <Gallery />
-  <Reviews />
-  <CtaBanner />
-  <Faq />
-  <PracticalInfo />
-  <Contact />
-</Base>
+const supportedLanguages = Object.values(languageModules).map(
+  (module) => module.lang
+);
+---
+<noscript>
+  <nav aria-label="Language selection">
+    <a href="/ca/">Català</a>
+    <a href="/es/">Español</a>
+    <a href="/en/">English</a>
+  </nav>
+</noscript>
+
+<script define:vars={{ supportedLanguages }}>
+  const storedLanguage = localStorage.getItem("language");
+
+  let language;
+
+  if (storedLanguage && supportedLanguages.includes(storedLanguage)) {
+    language = storedLanguage;
+  } else {
+    const browserLanguages = navigator.languages ?? [navigator.language];
+
+    language = browserLanguages
+      .map((lang) => lang.split("-")[0])
+      .find((lang) => supportedLanguages.includes(lang));
+  }
+
+  language ??= "ca";
+
+  window.location.replace(`/${language}/`);
+</script>

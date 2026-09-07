@@ -5,9 +5,9 @@
 //    → the form POSTs to it.
 //  - endpoint empty → no form: a prominent mailto button is shown instead
 //    (a broken form is worse than no form).
-import { SITE } from "../../config/site";
+import getContent from "../../utils/getcontent.ts"
+const { contact, business, ui } = getContent(Astro.currentLocale);
 
-const { contact, business, ui } = SITE;
 const hasEndpoint = contact.endpoint.length > 0;
 ---
 

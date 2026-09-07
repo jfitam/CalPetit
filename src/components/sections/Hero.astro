@@ -12,9 +12,14 @@
 // Both end with the mountain-ridge divider into the light content, and the
 // image is a real <img fetchpriority="high"> (not a CSS background) so the
 // browser treats it as the LCP priority.
-import { SITE } from "../../config/site";
+import getContent from "../../utils/getcontent.ts"
+const SITE = getContent(Astro.currentLocale);
 
-const { hero } = SITE;
+const hero = {
+  ...SITE.hero,
+  ...SITE.heroLabels,
+};
+
 const immersive = hero.layout === "immersive";
 
 // Optional highlighted substring in the title ("" disables it)

@@ -1,0 +1,52 @@
+---
+// Privacy policy (GDPR).
+// This template covers the simple case of a brochure site with NO tracking
+// cookies: no cookie banner is required as long as you don't add third-party
+// analytics or iframes (embedded Google Maps, YouTube...). If the site needs
+// analytics, prefer a cookieless solution (Plausible, Vercel Analytics) to
+// keep this page honest and avoid the banner.
+// ADAPT the prose to your jurisdiction and to what the site actually does.
+import Base from "../../layouts/Base.astro";
+import getContent from "../../utils/getcontent.ts"
+
+const SITE = getContent(Astro.currentLocale);
+const { legal, business, ui } = SITE
+
+export function getStaticPaths() {
+  const langModules = import.meta.glob("../../i18n/*.ts", {
+    eager: true,
+    import: "default",
+  }) as Record<string, { lang: string }>;
+
+  return Object.values(langModules).map((module) => ({
+    params: { lang: module.lang },
+  }));
+}
+
+const { lang } = Astro.params;
+
+const modules = import.meta.glob("../../i18n/privacy/*.mdx", {
+  eager: true,
+}) as Record<string, { Content: any }>;
+
+const match = Object.entries(modules).find(([path]) =>
+  path.includes(`/privacy/${lang}.mdx`)
+);
+
+if (!match) {
+  throw new Error(`Privacy page not found for language: ${lang}`);
+}
+
+const PrivacyPage = match[1].Content;
+---
+
+
+<Base
+  title={`${ui.privacyPolicyLabel} — ${SITE.name}`}
+  description={`Privacy policy for ${SITE.name}.`}
+  noindex
+>
+  <div class="container page-content">
+    <PrivacyPage ui={ui} legal={legal} business={business} />
+  </div>
+</Base>

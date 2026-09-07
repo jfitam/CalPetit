@@ -1,6 +1,15 @@
 ---
 import Base from "../layouts/Base.astro";
-import { SITE } from "../config/site";
+import getContent from "../../utils/getcontent.ts"
+const SITE = getContent(Astro.currentLocale)
+
+export function getStaticPath() {
+  return [
+    {params: { lang: "ca" } },
+    {params: { lang: "es" } },
+    {params: { lang: "en" } },
+  ]
+}
 ---
 
 <Base
